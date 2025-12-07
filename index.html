@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyingHigh - Air Travel & Airport Status Dashboard</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-airplane-fill"></i> FlyingHigh
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#favorites">Favorites</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container-fluid mt-4">
+        <!-- Search Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="bi bi-search"></i> Airport Search</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="airportSearch" class="form-label">Search by Airport Code (e.g., JFK, LAX, LHR)</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="airportSearch" 
+                                           placeholder="Enter airport code (IATA)" maxlength="3" 
+                                           style="text-transform: uppercase;">
+                                    <button class="btn btn-primary" type="button" id="searchBtn">
+                                        <i class="bi bi-search"></i> Search
+                                    </button>
+                                </div>
+                                <small class="text-muted">Enter a 3-letter IATA airport code</small>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="airportSelect" class="form-label">Or Select from Popular Airports</label>
+                                <select class="form-select" id="airportSelect">
+                                    <option value="">Choose an airport...</option>
+                                    <option value="JFK">JFK - John F. Kennedy International Airport</option>
+                                    <option value="LAX">LAX - Los Angeles International Airport</option>
+                                    <option value="LHR">LHR - London Heathrow Airport</option>
+                                    <option value="CDG">CDG - Charles de Gaulle Airport</option>
+                                    <option value="DXB">DXB - Dubai International Airport</option>
+                                    <option value="SIN">SIN - Singapore Changi Airport</option>
+                                    <option value="NRT">NRT - Narita International Airport</option>
+                                    <option value="FRA">FRA - Frankfurt Airport</option>
+                                    <option value="AMS">AMS - Amsterdam Schiphol Airport</option>
+                                    <option value="ORD">ORD - Chicago O'Hare International Airport</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <button class="btn btn-outline-primary btn-sm" id="addFavoriteBtn" style="display: none;">
+                                <i class="bi bi-star"></i> Add to Favorites
+                            </button>
+                            <button class="btn btn-outline-danger btn-sm" id="removeFavoriteBtn" style="display: none;">
+                                <i class="bi bi-star-fill"></i> Remove from Favorites
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="text-center" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Fetching flight data...</p>
+        </div>
+
+        <!-- Error Alert -->
+        <div id="errorAlert" class="alert alert-danger alert-dismissible fade" role="alert" style="display: none;">
+            <strong><i class="bi bi-exclamation-triangle"></i> Error:</strong> <span id="errorMessage"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <!-- Airport Status Section -->
+        <div id="airportStatusSection" class="row mb-4" style="display: none;">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">
+                            <i class="bi bi-building"></i> Airport Status: 
+                            <span id="airportName"></span> (<span id="airportCode"></span>)
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <strong>Location:</strong>
+                                    <p id="airportLocation" class="mb-0">-</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <strong>Timezone:</strong>
+                                    <p id="airportTimezone" class="mb-0">-</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <strong>Status:</strong>
+                                    <span id="airportStatusBadge" class="badge bg-success">Operational</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flight Filters -->
+        <div id="flightFilters" class="row mb-3" style="display: none;">
+            <div class="col-12">
+                <div class="btn-group" role="group">
+                    <input type="radio" class="btn-check" name="flightType" id="arrivals" value="arrivals" checked>
+                    <label class="btn btn-outline-primary" for="arrivals">
+                        <i class="bi bi-arrow-down-circle"></i> Arrivals
+                    </label>
+                    <input type="radio" class="btn-check" name="flightType" id="departures" value="departures">
+                    <label class="btn btn-outline-primary" for="departures">
+                        <i class="bi bi-arrow-up-circle"></i> Departures
+                    </label>
+                </div>
+                <div class="btn-group ms-2" role="group">
+                    <button class="btn btn-outline-secondary btn-sm" id="filterAll">All</button>
+                    <button class="btn btn-outline-success btn-sm" id="filterOnTime">On-Time</button>
+                    <button class="btn btn-outline-warning btn-sm" id="filterDelayed">Delayed</button>
+                    <button class="btn btn-outline-danger btn-sm" id="filterCancelled">Cancelled</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flights Table Section -->
+        <div id="flightsSection" class="row" style="display: none;">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">
+                            <i class="bi bi-list-ul"></i> <span id="flightsTitle">Arrivals</span>
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped" id="flightsTable">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Flight</th>
+                                        <th>Airline</th>
+                                        <th>From/To</th>
+                                        <th>Scheduled</th>
+                                        <th>Estimated</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="flightsTableBody">
+                                    <!-- Flight data will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="noFlightsMessage" class="text-center text-muted py-4" style="display: none;">
+                            <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                            <p class="mt-2">No flights found for this airport.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Favorites Section -->
+        <div id="favoritesSection" class="row mt-4" style="display: none;">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-warning text-dark">
+                        <h5 class="mb-0"><i class="bi bi-star-fill"></i> Favorite Airports</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="favoritesList" class="d-flex flex-wrap gap-2">
+                            <!-- Favorite airports will be inserted here -->
+                        </div>
+                        <p id="noFavoritesMessage" class="text-muted text-center mt-3" style="display: none;">
+                            No favorite airports yet. Search for an airport and click "Add to Favorites" to add it.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white mt-5 py-4">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6>FlyingHigh - Air Travel & Airport Status Dashboard</h6>
+                    <p class="mb-0">Group C - Client Programming Project</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">
+                        <small>Powered by AviationStack API</small>
+                    </p>
+                    <p class="mb-0">
+                        <small>&copy; 2025 FlyingHigh Dashboard. All rights reserved.</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
+
