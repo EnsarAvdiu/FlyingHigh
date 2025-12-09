@@ -1,4 +1,4 @@
-// ensar - app state and orchestration
+// Begin Ensar Avdiu
 
 const appState = {
     currentAirport: null,
@@ -81,11 +81,16 @@ async function searchAirport(airportCode) {
             fetchFlights(airportCode)
         ]);
 
-        if (airportData) {
-            displayAirportStatus(airportData);
-            appState.currentAirport = airportData;
-            updateFavoriteButtons();
-        }
+        if (!airportData) {
+    showError("Airport not found. Please enter a valid IATA code.");
+    hideSections();
+    return;
+}
+
+displayAirportStatus(airportData);
+appState.currentAirport = airportData;
+updateFavoriteButtons();
+
 
         if (flightsData && flightsData.length > 0) {
             appState.currentFlights = flightsData;
@@ -100,5 +105,5 @@ async function searchAirport(airportCode) {
     }
 }
 
-// ensar end
+// End Ensar Avdiu
 

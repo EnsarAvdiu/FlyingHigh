@@ -1,4 +1,4 @@
-// veron - API
+// Begin Veron Osmani
 
 const API_CONFIG = {
     baseURL: 'https://api.aviationstack.com/v1',
@@ -172,5 +172,5 @@ function formatDateTime(dateTimeString) {
     }
 }
 
-// veron end
+// End Veron Osmani
 

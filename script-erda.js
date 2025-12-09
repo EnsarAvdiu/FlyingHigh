@@ -1,4 +1,4 @@
-// erda 
+// Begin Erda Salihu
 
 function displayAirportStatus(airport) {
     document.getElementById('airportName').textContent = airport.airport_name || 'Unknown';
@@ -216,6 +216,33 @@ function showError(message) {
 function hideError() {
 }
 
+
+function showError(message) {
+    hideError(); 
+
+    const alert = document.createElement('div');
+    alert.id = "errorAlert";
+    alert.className = 'alert alert-danger mt-3';
+    alert.textContent = message;
+
+
+    const container = document.querySelector('.container-fluid');
+    container.prepend(alert);
+
+
+   setTimeout(() => {
+    hideError();
+}, 7000);
+
+}
+
+function hideError() {
+    const existing = document.getElementById('errorAlert');
+    if (existing) {
+        existing.remove();
+    }
+}
+
 function hideSections() {
     document.getElementById('airportStatusSection').style.display = 'none';
     document.getElementById('flightsSection').style.display = 'none';
@@ -229,5 +256,5 @@ function showNoFlights() {
     document.getElementById('flightsTableBody').innerHTML = '';
 }
 
-// erda end
+// End Erda Salihu
 
