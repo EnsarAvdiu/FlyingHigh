@@ -1,7 +1,7 @@
-/* Custom Styles for FlyingHigh Dashboard */
-
+/* //genc hasani */
 :root {
-    --primary-color: #0d6efd;
+    --primary-color: #E84A72;
+    --secondary-color: #F8C5C2;
     --success-color: #198754;
     --warning-color: #ffc107;
     --danger-color: #dc3545;
@@ -16,7 +16,10 @@ body {
     flex-direction: column;
 }
 
-/* Navigation Bar */
+.navbar {
+    background-color: var(--primary-color) !important;
+}
+
 .navbar-brand {
     font-weight: bold;
     font-size: 1.5rem;
@@ -26,7 +29,6 @@ body {
     margin-right: 0.5rem;
 }
 
-/* Cards */
 .card {
     border: none;
     border-radius: 0.5rem;
@@ -38,13 +40,31 @@ body {
     font-weight: 600;
 }
 
-/* Search Input */
+.card-header.bg-primary,
+.bg-primary {
+    background-color: var(--primary-color) !important;
+    color: #fff;
+}
+
+.bg-info {
+    background-color: var(--secondary-color) !important;
+    color: #7a233d;
+}
+
+.bg-success {
+    background-color: #4caf50 !important;
+}
+
+.bg-warning {
+    background-color: var(--secondary-color) !important;
+    color: #7a233d !important;
+}
+
 #airportSearch {
     font-weight: 500;
     letter-spacing: 0.1rem;
 }
 
-/* Status Badges */
 .badge {
     font-size: 0.9rem;
     padding: 0.5rem 1rem;
@@ -76,7 +96,6 @@ body {
     color: white;
 }
 
-/* Flight Table */
 .table {
     margin-bottom: 0;
 }
@@ -102,28 +121,24 @@ body {
     overflow-y: auto;
 }
 
-/* Flight Number */
 .flight-number {
     font-weight: 600;
     color: var(--primary-color);
 }
 
-/* Airline Name */
 .airline-name {
     font-weight: 500;
 }
 
-/* Airport Code */
 .airport-code {
     font-weight: 600;
-    color: var(--info-color);
-    background-color: #e7f3ff;
+    color: #7a233d;
+    background-color: var(--secondary-color);
     padding: 0.2rem 0.5rem;
     border-radius: 0.25rem;
     display: inline-block;
 }
 
-/* Time Display */
 .time-scheduled {
     color: #6c757d;
 }
@@ -137,7 +152,6 @@ body {
     font-weight: 600;
 }
 
-/* Favorites */
 .favorite-badge {
     cursor: pointer;
     transition: transform 0.2s;
@@ -147,20 +161,29 @@ body {
     transform: scale(1.1);
 }
 
-/* Loading Spinner */
 #loadingSpinner {
     padding: 3rem;
 }
 
-/* Error Alert */
 .alert {
     border-radius: 0.5rem;
 }
 
-/* Filters */
 .btn-group .btn {
     border-radius: 0.25rem;
     margin-right: 0.25rem;
+}
+
+.btn-primary,
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
 }
 
 .btn-group .btn.active {
@@ -169,12 +192,15 @@ body {
     border-color: var(--primary-color);
 }
 
-/* Footer */
+.table-dark {
+    background-color: #2d0e1a !important;
+    color: #fff;
+}
+
 footer {
     margin-top: auto;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 768px) {
     .table-responsive {
         max-height: 400px;
@@ -220,7 +246,6 @@ footer {
     }
 }
 
-/* Scrollbar Styling */
 .table-responsive::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -240,7 +265,6 @@ footer {
     background: #555;
 }
 
-/* Animation for new data */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -256,8 +280,9 @@ footer {
     animation: fadeIn 0.3s ease-in;
 }
 
-/* Empty State */
 .text-center i {
     opacity: 0.5;
 }
+
+/* //genc hasani */
 

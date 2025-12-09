@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlyingHigh - Air Travel & Airport Status Dashboard</title>
     
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <!-- Custom CSS -->
+    <!-- //genc hasani -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
@@ -35,9 +32,7 @@
         </div>
     </nav>
 
-    <!-- Main Container -->
     <div class="container-fluid mt-4">
-        <!-- Search Section -->
         <div class="row mb-4">
             <div class="col-12">
                 <div class="card shadow-sm">
@@ -88,21 +83,6 @@
             </div>
         </div>
 
-        <!-- Loading Spinner -->
-        <div id="loadingSpinner" class="text-center" style="display: none;">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <p class="mt-2">Fetching flight data...</p>
-        </div>
-
-        <!-- Error Alert -->
-        <div id="errorAlert" class="alert alert-danger alert-dismissible fade" role="alert" style="display: none;">
-            <strong><i class="bi bi-exclamation-triangle"></i> Error:</strong> <span id="errorMessage"></span>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-
-        <!-- Airport Status Section -->
         <div id="airportStatusSection" class="row mb-4" style="display: none;">
             <div class="col-12">
                 <div class="card shadow-sm">
@@ -138,7 +118,6 @@
             </div>
         </div>
 
-        <!-- Flight Filters -->
         <div id="flightFilters" class="row mb-3" style="display: none;">
             <div class="col-12">
                 <div class="btn-group" role="group">
@@ -160,12 +139,11 @@
             </div>
         </div>
 
-        <!-- Flights Table Section -->
         <div id="flightsSection" class="row" style="display: none;">
             <div class="col-12">
                 <div class="card shadow-sm">
-                    <div class="card-header bg-success text-white">
-                        <h5 class="mb-0">
+                    <div class="card-header text-white">
+                        <h5 class="mb-0" style='color: #E84A72;'>
                             <i class="bi bi-list-ul"></i> <span id="flightsTitle">Arrivals</span>
                         </h5>
                     </div>
@@ -183,7 +161,6 @@
                                     </tr>
                                 </thead>
                                 <tbody id="flightsTableBody">
-                                    <!-- Flight data will be inserted here -->
                                 </tbody>
                             </table>
                         </div>
@@ -196,7 +173,6 @@
             </div>
         </div>
 
-        <!-- Favorites Section -->
         <div id="favoritesSection" class="row mt-4" style="display: none;">
             <div class="col-12">
                 <div class="card shadow-sm">
@@ -205,7 +181,6 @@
                     </div>
                     <div class="card-body">
                         <div id="favoritesList" class="d-flex flex-wrap gap-2">
-                            <!-- Favorite airports will be inserted here -->
                         </div>
                         <p id="noFavoritesMessage" class="text-muted text-center mt-3" style="display: none;">
                             No favorite airports yet. Search for an airport and click "Add to Favorites" to add it.
@@ -216,7 +191,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-dark text-white mt-5 py-4">
         <div class="container-fluid">
             <div class="row">
@@ -236,10 +210,11 @@
         </div>
     </footer>
 
-    <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JavaScript -->
-    <script src="script.js"></script>
+    <script src="script-veron.js"></script>
+    <script src="script-erda.js"></script>
+    <script src="script-ensar.js"></script>
+    <!-- //genc hasani -->
 </body>
 </html>
 
